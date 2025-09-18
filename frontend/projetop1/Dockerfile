@@ -1,24 +1,11 @@
-# deps
-FROM node:20-alpine AS deps
+FROM node:20-alpine
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --include=dev --no-audit --fund=false
-
-# build
-FROM node:20-alpine AS builder
-WORKDIR /app
-ENV NEXT_TELEMETRY_DISABLED=1
-COPY --from=deps /app/node_modules ./node_modules
+RUN npm ci --no-audit --fund=false
 COPY . .
-RUN npm run build
-
-# runner
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=development
+ENV HOST=0.0.0.0
 ENV PORT=3000
 EXPOSE 3000
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-CMD ["node", "server.js"]
+CMD ["sh","-c","npm run dev -- -H ${HOST} -p ${PORT:-3000}"]
