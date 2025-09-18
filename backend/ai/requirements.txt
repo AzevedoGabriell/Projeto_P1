@@ -1,0 +1,16 @@
+# --- LiveKit (cliente/agents) ---
+livekit>=0.18.0
+livekit-api>=1.0.5
+livekit-agents>=0.7.0
+
+# --- Utilidades ---
+python-dotenv>=1.0.1
+ujson>=5.10.0
+aiohttp>=3.10.0
+
+# --- Provedores que você disse usar pelas ENVs ---
+# GOOGLE_API_KEY normalmente é usado com Google Generative AI:
+google-generativeai>=0.7.2
+
+# ELEVEN_API_KEY (SDK oficial)
+elevenlabs>=1.6.1
