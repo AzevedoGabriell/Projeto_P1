@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # 3) Instalar requisitos da IA
-COPY requirements-ia.txt ./requirements-ia.txt
+COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements-ia.txt
 
 # 4) Copiar código da IA
